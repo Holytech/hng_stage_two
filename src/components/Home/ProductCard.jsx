@@ -14,10 +14,10 @@ const ProductCard = ({ item }) => {
           <p className="font-bold">&#x20A6;{item.price}</p>
         </div>
         <div className="w-full flex justify-between font-medium">
-          <button className="border-0 bg-[#D16306] hover:text-[#fff]  hover:bg-[#587657] text-sm py-1 px-2 text-white">
+          <button className="border-0 bg-[#D16306] hover:text-[#fff]  hover:bg-[#587657] text-sm py-1 px-2 text-white rounded-md">
             Add to cart
           </button>
-          <button className="text-[#fff] border-0 border-[#587657] bg-[#587657] hover:text-white hover:bg-[#D16306] text-sm py-1 px-2">
+          <button className="text-[#fff] border-0 border-[#587657] bg-[#587657] hover:text-white hover:bg-[#D16306] text-sm py-1 px-2 rounded-md">
             Details
           </button>
         </div>
