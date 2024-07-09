@@ -1,13 +1,17 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsCart4 } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ cartCount }) => {
   const [nav, setNav] = useState(false);
   const { pathname } = useLocation();
+  useEffect(() => {
+    console.log("RELOADED");
+  }, []);
 
   return (
     <>
@@ -54,7 +58,17 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-8 text-xl">
             <IoSearchOutline className="cursor-pointer hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
-            <BsCart4 className="cursor-pointer hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
+            <Link to="/cart" className="relative">
+              {cartCount > 0 ? (
+                <span className="absolute -right-1 -top-1 z-10 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D16306] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D16306]"></span>
+                </span>
+              ) : (
+                ""
+              )}
+              <BsCart4 className="cursor-pointer relative hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
+            </Link>
           </div>
         </div>
         <div className="w-full md:hidden overflow-hidden px-5 py-2 fixed bg-[#587657]">
@@ -151,6 +165,10 @@ const Navbar = () => {
       </div>
     </>
   );
+};
+
+Navbar.propTypes = {
+  cartCount: PropTypes.number,
 };
 
 export default Navbar;
