@@ -59,13 +59,11 @@ const Navbar = ({ cartCount }) => {
           <div className="flex items-center gap-8 text-xl">
             <IoSearchOutline className="cursor-pointer hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
             <Link to="/cart" className="relative">
-              {cartCount > 0 ? (
+              {cartCount > 0 && (
                 <span className="absolute -right-1 -top-1 z-10 flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D16306] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D16306]"></span>
                 </span>
-              ) : (
-                ""
               )}
               <BsCart4 className="cursor-pointer relative hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
             </Link>
@@ -81,10 +79,17 @@ const Navbar = ({ cartCount }) => {
               style={{ fontSize: "30px" }}
             >
               <IoSearchOutline className="cursor-pointer hover:text-[#C7C7A6]" />
-              <BsCart4 className="cursor-pointer hover:text-[#C7C7A6]" />
+              <Link to="/cart" className="relative">
+                {cartCount > 0 && (
+                  <span className="absolute -right-1 -top-1 z-10 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D16306] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D16306]"></span>
+                  </span>
+                )}
+                <BsCart4 className="cursor-pointer relative hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
+              </Link>
               <AiOutlineMenu
                 className="cursor-pointer text-white"
-                // style={{ fontSize: "40px" }}
                 onClick={() => setNav(true)}
               />
             </div>
@@ -157,7 +162,17 @@ const Navbar = ({ cartCount }) => {
               </div>
               <div className="flex gap-8">
                 <IoSearchOutline className="cursor-pointer hover:text-[#C7C7A6]" />
-                <BsCart4 className="cursor-pointer hover:text-[#C7C7A6]" />
+                <Link to="/cart" className="relative">
+                  {cartCount > 0 ? (
+                    <span className="absolute -right-1 -top-1 z-10 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D16306] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D16306]"></span>
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                  <BsCart4 className="cursor-pointer relative hover:text-[#C7C7A6] transition duration-700 ease-in-out" />
+                </Link>
               </div>
             </div>
           </div>

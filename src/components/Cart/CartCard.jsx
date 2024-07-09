@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
-const CartCard = ({ item }) => {
+const CartCard = ({ item, removeItem }) => {
   return (
     <>
       <div className="w-full flex items-center border-2 border-[#B1AEAE] p-3 md:p-5 justify-between">
@@ -31,7 +31,10 @@ const CartCard = ({ item }) => {
             "," +
             item.price.toString().substring(3)}
         </p>
-        <FaTimes className="cursor-pointer" />
+        <FaTimes
+          className="cursor-pointer"
+          onClick={() => removeItem(item.id)}
+        />
       </div>
     </>
   );
@@ -39,6 +42,7 @@ const CartCard = ({ item }) => {
 
 CartCard.propTypes = {
   item: PropTypes.object,
+  removeItem: PropTypes.func,
 };
 
 export default CartCard;
