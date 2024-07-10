@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
 import { addCommasToNumber } from "../../Logics/Functions";
-const CartCard = ({ item, removeItem }) => {
+const CartCard = ({
+  item,
+  removeItem,
+  increaseItemQuantity,
+  decreaseItemQuantity,
+}) => {
   return (
     <>
       <div className="w-full flex items-center border-2 border-[#B1AEAE] p-3 md:p-5 justify-between">
@@ -14,7 +19,11 @@ const CartCard = ({ item, removeItem }) => {
         </div>
         <p className="text-md md:text-2xl">{item.name}</p>
         <div className="flex gap-2">
-          <button className="text-lg" role="button">
+          <button
+            className="text-lg"
+            role="button"
+            onClick={() => decreaseItemQuantity(item)}
+          >
             -
           </button>
           <input
@@ -22,7 +31,11 @@ const CartCard = ({ item, removeItem }) => {
             className="w-[30px] md:w-[50px] h-[30px] md:h-[50px] border-2 text-md md:text-xl text-center border-[#B1AEAE] outline-none focus:outline-none p-2"
             value={item.quantity}
           />
-          <button className="text-lg" role="button">
+          <button
+            className="text-lg"
+            role="button"
+            onClick={() => increaseItemQuantity(item)}
+          >
             +
           </button>
         </div>
@@ -42,6 +55,8 @@ const CartCard = ({ item, removeItem }) => {
 CartCard.propTypes = {
   item: PropTypes.object,
   removeItem: PropTypes.func,
+  increaseItemQuantity: PropTypes.func,
+  decreaseItemQuantity: PropTypes.func,
 };
 
 export default CartCard;

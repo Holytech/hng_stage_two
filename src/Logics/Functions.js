@@ -13,3 +13,5 @@ export const addCommasToNumber = (number) => {
   // Combine integer part with decimal part (if any)
   return integerWithCommas + decimalPart;
 };
+
+// export const increaseItemQuantity = () => {};

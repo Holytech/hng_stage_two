@@ -25,7 +25,7 @@ const SideNav = () => {
         <nav className="flex flex-col justify-between h-full min-w-[240px] p-2 font-sans text-lg font-normal text-gray-700">
           <div className="flex flex-col gap-2">
             <Link
-              to="#"
+              to="/"
               role="button"
               tabIndex="0"
               className="flex items-center gap-5 w-full p-3 rounded-lg text-start leading-tight transition-all outline-none font-bold bg-[#587657] text-white hover:bg-[#C7C7A6] hover:bg-opacity-80 hover:text-[#587657]"
@@ -33,7 +33,7 @@ const SideNav = () => {
               PRODUCT
             </Link>
             <Link
-              to="#"
+              to="/"
               role="button"
               tabIndex="0"
               className="flex items-center gap-5 w-full p-3 rounded-lg text-start leading-tight transition-all outline-none font-bold bg-[#587657] text-white hover:bg-[#C7C7A6] hover:bg-opacity-80 hover:text-[#587657]"
@@ -41,7 +41,7 @@ const SideNav = () => {
               FEATURED
             </Link>
             <Link
-              to="#"
+              to="/cart"
               role="button"
               tabIndex="0"
               className="flex items-center gap-5 w-full p-3 rounded-lg text-start leading-tight transition-all outline-none font-bold bg-[#587657] text-white hover:bg-[#C7C7A6] hover:bg-opacity-80 hover:text-[#587657]"
@@ -67,7 +67,7 @@ const SideNav = () => {
           </div>
         </nav>
       </div>
-      <div className="w-fit h-fit p-4">
+      <div className="w-fit h-fit p-4 block md:hidden">
         <TbLayoutSidebarLeftExpandFilled
           className="cursor-pointer text-[#587657] text-4xl"
           onClick={() => setNav(true)}
@@ -100,40 +100,38 @@ const SideNav = () => {
           <div className="flex flex-col gap-8 text-white justify-between h-fit mb-[50px] uppercase">
             <Link
               to="/"
-              className={`${
-                pathname == "/" ? "text-[#C7C7A6]" : "hover:text-[#C7C7A6]"
-              }`}
+              className={`hover:text-[#C7C7A6]`}
               onClick={() => setNav(false)}
             >
-              Home
+              PRODUCTS
+            </Link>
+            <Link
+              to="/"
+              className={`hover:text-[#C7C7A6]`}
+              onClick={() => setNav(false)}
+            >
+              FEATURED
+            </Link>
+            <Link
+              to="/cart"
+              className={`hover:text-[#C7C7A6]`}
+              onClick={() => setNav(false)}
+            >
+              CART
             </Link>
             <Link
               to="#"
               className={`hover:text-[#C7C7A6]`}
               onClick={() => setNav(false)}
             >
-              Shop
+              CHECKOUT
             </Link>
             <Link
               to="#"
               className={`hover:text-[#C7C7A6]`}
               onClick={() => setNav(false)}
             >
-              Products
-            </Link>
-            <Link
-              to="#"
-              className={`hover:text-[#C7C7A6]`}
-              onClick={() => setNav(false)}
-            >
-              Blog
-            </Link>
-            <Link
-              to="#"
-              className={`hover:text-[#C7C7A6]`}
-              onClick={() => setNav(false)}
-            >
-              Contact
+              MY PROFILE
             </Link>
           </div>
           <div className="flex gap-8">

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import SideNav from "../components/Layouts/SideNav";
 import CartCard from "../components/Cart/CartCard";
 import { Link } from "react-router-dom";
-import { addCommasToNumber } from "../Logics/Functions";
+import OrderSummary from "../components/Cart/OrderSummary";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Cart = () => {
   const [cartItem, setCartItem] = useState([]);
@@ -18,9 +19,10 @@ const Cart = () => {
   useEffect(() => {
     let temp = 0;
     cartItem.map((each) => {
-      temp += each.price;
+      temp += each.price * each.quantity;
     });
     setTotal(temp);
+    localStorage.setItem("TotalAmount", JSON.stringify(temp));
   }, [cartItem]);
 
   const removeItem = (itemIdToDelete) => {
@@ -29,6 +31,42 @@ const Cart = () => {
       cartItems = cartItems.filter((item) => item.id !== itemIdToDelete);
       localStorage.setItem("carts", JSON.stringify(cartItems));
       setCartItem(cartItems);
+    }
+  };
+
+  const increaseItemQuantity = (item) => {
+    console.log("CLICKED");
+    let cartItems = JSON.parse(localStorage.getItem("carts"));
+    if (cartItems) {
+      let itemToUpdate = cartItems.find((each) => each.id === item.id);
+
+      if (itemToUpdate) {
+        itemToUpdate.quantity += 1;
+      }
+
+      localStorage.setItem("carts", JSON.stringify(cartItems));
+      setCartItem(cartItems);
+    }
+  };
+
+  const decreaseItemQuantity = (item) => {
+    console.log("CLICKED");
+    let cartItems = JSON.parse(localStorage.getItem("carts"));
+    if (cartItems) {
+      let itemToUpdate = cartItems.find((each) => each.id === item.id);
+
+      if (itemToUpdate) {
+        itemToUpdate.quantity -= 1;
+      }
+      if (itemToUpdate.quantity == 0) {
+        let itemIdToDelete = itemToUpdate.id;
+        let newCart = cartItems.filter((item) => item.id !== itemIdToDelete);
+        localStorage.setItem("carts", JSON.stringify(newCart));
+        setCartItem(newCart);
+      } else {
+        localStorage.setItem("carts", JSON.stringify(cartItems));
+        setCartItem(cartItems);
+      }
     }
   };
 
@@ -44,26 +82,25 @@ const Cart = () => {
             <div className="flex flex-col md:flex-row gap-14">
               <div className="w-full md:w-4/6 flex flex-col gap-4 md:gap-8">
                 {cartItem.map((each, index) => (
-                  <CartCard item={each} key={index} removeItem={removeItem} />
+                  <CartCard
+                    item={each}
+                    key={index}
+                    removeItem={removeItem}
+                    increaseItemQuantity={increaseItemQuantity}
+                    decreaseItemQuantity={decreaseItemQuantity}
+                  />
                 ))}
               </div>
-              <div className="w-full md:w-2/6 bg-[#587657] p-5 h-fit">
-                <div className="w-full flex flex-col gap-5">
-                  <h1 className="text-white font-bold text-2xl">Summary</h1>
-                  <p className="text-white text-xl">
-                    Order Total: &#x20A6;
-                    {total != 0 ? addCommasToNumber(total) : 0}
-                  </p>
-                  <p className="text-white text-xl">
-                    Shipping Fee:{" "}
-                    <span className="py-1 px-3 bg-white text-black font-semibold">
-                      Free
-                    </span>
-                  </p>
-                  <p className="text-white text-xl">
-                    Shipping: &#x20A6;
-                    {total != 0 ? addCommasToNumber(total) : 0}
-                  </p>
+              <div className="w-full md:w-2/6 flex flex-col">
+                <div className="w-full flex flex-col gap-8">
+                  <OrderSummary total={total} />
+                  <Link
+                    to="#"
+                    className="flex w-fit gap-4 bg-[#D16306] px-5 py-3 mx-auto items-center"
+                  >
+                    <span className="text-white">Checkout Items</span>
+                    <FaArrowRightLong className="text-2xl" />
+                  </Link>
                 </div>
               </div>
             </div>
