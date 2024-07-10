@@ -162,7 +162,11 @@ const Navbar = ({ cartCount }) => {
               </div>
               <div className="flex gap-8">
                 <IoSearchOutline className="cursor-pointer hover:text-[#C7C7A6]" />
-                <Link to="/cart" className="relative">
+                <Link
+                  to="/cart"
+                  className="relative"
+                  onClick={() => setNav(false)}
+                >
                   {cartCount > 0 ? (
                     <span className="absolute -right-1 -top-1 z-10 flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D16306] opacity-75"></span>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import SideNav from "../components/Layouts/SideNav";
 import CartCard from "../components/Cart/CartCard";
+import { Link } from "react-router-dom";
+import { addCommasToNumber } from "../Logics/Functions";
 
 const Cart = () => {
   const [cartItem, setCartItem] = useState([]);
@@ -32,9 +34,9 @@ const Cart = () => {
 
   return (
     <>
-      <div className="w-full flex">
+      <div className="w-full flex flex-col md:flex-row">
         <SideNav />
-        <div className="w-full p-2 md:p-10">
+        <div className="w-full p-2 md:p-10 h-screen overflow-scroll">
           <div>
             <h1 className="text-[#D16306] text-3xl font-bold mb-5">MY CART</h1>
           </div>
@@ -50,11 +52,7 @@ const Cart = () => {
                   <h1 className="text-white font-bold text-2xl">Summary</h1>
                   <p className="text-white text-xl">
                     Order Total: &#x20A6;
-                    {total != 0
-                      ? total.toString().substring(0, 3) +
-                        "," +
-                        total.toString().substring(3)
-                      : 0}
+                    {total != 0 ? addCommasToNumber(total) : 0}
                   </p>
                   <p className="text-white text-xl">
                     Shipping Fee:{" "}
@@ -64,18 +62,29 @@ const Cart = () => {
                   </p>
                   <p className="text-white text-xl">
                     Shipping: &#x20A6;
-                    {total != 0
-                      ? total.toString().substring(0, 3) +
-                        "," +
-                        total.toString().substring(3)
-                      : 0}
+                    {total != 0 ? addCommasToNumber(total) : 0}
                   </p>
                 </div>
               </div>
             </div>
           ) : (
             <>
-              <div className="w-full"></div>
+              <div className="w-full h-fit flex flex-col gap-4">
+                <img
+                  src="/empty_cart.png"
+                  alt="cart is empty"
+                  className="mx-auto"
+                />
+                <h1 className="w-fit mx-auto font-bold text-[#587657] text-xl">
+                  Your Cart is empty
+                </h1>
+                <Link
+                  to="/"
+                  className="bg-[#587657] text-white font-bold text-xl px-3 py-2 rounded-lg w-fit mx-auto"
+                >
+                  Continue Shopping
+                </Link>
+              </div>
             </>
           )}
         </div>

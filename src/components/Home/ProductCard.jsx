@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { addCommasToNumber } from "../../Logics/Functions";
 
 const ProductCard = ({ item, updateCart }) => {
   return (
@@ -11,7 +12,7 @@ const ProductCard = ({ item, updateCart }) => {
         />
         <div className="text-center text-2xl md:text-lg">
           <p className="font-bold">{item.name}</p>
-          <p className="font-bold">&#x20A6;{item.price}</p>
+          <p className="font-bold">&#x20A6;{addCommasToNumber(item.price)}</p>
         </div>
         <div className="w-full flex justify-between font-medium">
           <button

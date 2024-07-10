@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
+import { addCommasToNumber } from "../../Logics/Functions";
 const CartCard = ({ item, removeItem }) => {
   return (
     <>
@@ -27,9 +28,7 @@ const CartCard = ({ item, removeItem }) => {
         </div>
         <p className="text-md md:text-lg font-semibold">
           &#x20A6;
-          {item.price.toString().substring(0, 3) +
-            "," +
-            item.price.toString().substring(3)}
+          {addCommasToNumber(item.price)}
         </p>
         <FaTimes
           className="cursor-pointer"
